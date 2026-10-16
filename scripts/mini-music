@@ -1,0 +1,20 @@
+#!/bin/sh
+# Use a local SSH alias. No addresses, usernames or credentials in this file.
+set -eu
+mode="${1:-check}"
+if [ "$#" -gt 1 ]; then
+    printf '%s\n' 'Usage: mini-music [check|status]' >&2
+    exit 2
+fi
+case "$mode" in
+    check|status) ;;
+    *) printf '%s\n' 'Usage: mini-music [check|status]' >&2; exit 2 ;;
+esac
+mini_host="${MINI_SSH_HOST:-mini-homelab}"
+case "$mini_host" in
+    ''|-*|*[!A-Za-z0-9._-]*)
+        printf '%s\n' 'MINI_SSH_HOST must be a simple SSH alias.' >&2
+        exit 2 ;;
+esac
+exec ssh -o BatchMode=yes -o StrictHostKeyChecking=yes \
+    -o ConnectTimeout=10 "$mini_host" "./music-recovery $mode"

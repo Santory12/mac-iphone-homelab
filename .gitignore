@@ -16,3 +16,11 @@ local/
 .gemini/
 .codex/
 .ssh/
+reports/
+checkpoints/
+downloads/
+__pycache__/
+*.tar
+*.zip
+id_ed25519*
+id_rsa*

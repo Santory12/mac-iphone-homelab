@@ -1,0 +1,9 @@
+# Merge this block into ~/.ssh/config after replacing the placeholders.
+# Keep the real file outside this repository. Do not overwrite other entries.
+Host mini-homelab
+    HostName MINI_ZT_IP
+    User MINI_USER
+    IdentityFile ~/.ssh/id_ed25519_mini
+    IdentitiesOnly yes
+    StrictHostKeyChecking yes
+    ConnectTimeout 10
